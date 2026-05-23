@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -13,8 +15,29 @@ import {
   GalleryVerticalEnd,
   Globe,
   LayoutDashboard,
-  Settings,
 } from "lucide-react";
+import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
+
+const data = {
+  navMain: [
+    {
+      label: "Dashboard",
+      url: "/",
+      icon: LayoutDashboard,
+    },
+    {
+      label: "Frontend",
+      url: "/frontend",
+      icon: Globe,
+    },
+    {
+      label: "Backend",
+      url: "/backend",
+      icon: Database,
+    },
+  ],
+};
 
 export function AppSidebar() {
   return (
@@ -37,35 +60,11 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <LayoutDashboard />
-                Dashboard
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Globe />
-                Frontend
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Database />
-                Backend
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Settings /> Settings
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+        <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
     </Sidebar>
   );
 }

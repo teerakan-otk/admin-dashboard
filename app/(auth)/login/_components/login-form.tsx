@@ -117,15 +117,9 @@ export function LoginForm() {
                       />
                       <InputGroupAddon align="inline-end">
                         {showPassword ? (
-                          <EyeIcon
-                            className="cursor-pointer"
-                            onClick={() => setShowPassword(false)}
-                          />
+                          <EyeIcon onClick={() => setShowPassword(false)} />
                         ) : (
-                          <EyeOffIcon
-                            className="cursor-pointer"
-                            onClick={() => setShowPassword(true)}
-                          />
+                          <EyeOffIcon onClick={() => setShowPassword(true)} />
                         )}
                       </InputGroupAddon>
                     </InputGroup>
@@ -141,7 +135,7 @@ export function LoginForm() {
       </CardContent>
       <CardFooter>
         <Field>
-          <Button type="submit" form="login-form" className="cursor-pointer">
+          <Button type="submit" form="login-form">
             {isLoging ? "Logging in..." : "Login"}
           </Button>
           {loginError && (
