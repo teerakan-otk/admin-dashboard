@@ -11,10 +11,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "HAProxy MUI",
-    template: "%s | HAProxy MUI",
+    default: "Admin Dashboard",
+    template: "%s | Admin Dashboard",
   },
-  description: "HAProxy MUI",
+  description: "Admin Dashboard",
 };
 
 export default function RootLayout({

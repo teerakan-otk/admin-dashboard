@@ -2,8 +2,13 @@
 
 import { useRouter } from "next/navigation";
 
-import { Bell, ChevronsUpDown, LogOut, Settings, User } from "lucide-react";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
+import { ChevronsUpDown, LogOut } from "lucide-react";
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "./ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,9 +19,15 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { LucideIcon } from "lucide-react";
 
-export function NavUser() {
+export function NavUser({
+  items,
+}: {
+  items: { label: string; url: string; icon?: LucideIcon }[];
+}) {
   const router = useRouter();
+  const { isMobile, toggleSidebar } = useSidebar();
 
   return (
     <SidebarMenu>
@@ -57,22 +68,25 @@ export function NavUser() {
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push("/profile")}>
-                <User />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/settings")}>
-                <Settings />
-                Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/notifications")}>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
+            <DropdownMenuGroup className="*:cursor-pointer">
+              {items.map((item) => (
+                <DropdownMenuItem
+                  key={item.url}
+                  onClick={() => {
+                    router.push(item.url);
+                    isMobile && toggleSidebar();
+                  }}
+                >
+                  {item.icon && <item.icon />}
+                  {item.label}
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => router.push("/login")}>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => router.push("/login")}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
